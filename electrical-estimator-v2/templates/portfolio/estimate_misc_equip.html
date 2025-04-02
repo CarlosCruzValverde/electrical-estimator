@@ -1,0 +1,317 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container">
+    <header>
+        <h1>Miscellaneous & Equipment</h1>
+    </header>
+    <form id="miscEquipmentForm" action="{{ url_for('portfolio.estimate_misc_equip') }}" method="POST">
+        <div class="columns">
+            <!-- Column 1: Miscellaneous Items -->
+            <div class="column">
+                <h2>Miscellaneous</h2>
+                <div id="misc-fields">
+                    <!-- Default Miscellaneous Fields -->
+                    <div class="input-group">
+                        <label for="bollards">Bollards</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="bollards-cost">Cost per unit ($)</label>
+                                <input type="number" id="bollards-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="bollards-quantity">Quantity</label>
+                                <input type="number" id="bollards-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="bollards-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <!-- Repeat for Coring, Signage, Mobile Storage, Portable Restrooms, Electrical Fittings, Misc. Hardware, Tools, Concrete Work -->
+                    <!-- Coring -->
+                    <div class="input-group">
+                        <label for="coring">Coring</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="coring-cost">Cost per unit ($)</label>
+                                <input type="number" id="coring-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="coring-quantity">Quantity</label>
+                                <input type="number" id="coring-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="coring-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <!-- Add more items as needed -->
+                    <div class="input-group">
+                        <label for="signage">Signage</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="signage-cost">Cost per unit ($)</label>
+                                <input type="number" id="signage-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="signage-quantity">Quantity</label>
+                                <input type="number" id="signage-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="signage-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="mobilestorage">Mobile Storage</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="mobilestorage-cost">Cost per unit ($)</label>
+                                <input type="number" id="mobilestorage-cost" placeholder="Cost per unit ($)"
+                                    step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="mobilestorage-quantity">Quantity</label>
+                                <input type="number" id="mobilestorage-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="mobilestorage-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="restroom">Portable Restrooms</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="restroom-cost">Cost per unit ($)</label>
+                                <input type="number" id="restroom-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="restroom-quantity">Quantity</label>
+                                <input type="number" id="restroom-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="restroom-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="fittings">Electrical Fittings</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="fittings-cost">Cost per unit ($)</label>
+                                <input type="number" id="fittings-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="fittings-quantity">Quantity</label>
+                                <input type="number" id="fittings-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="fittings-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="hardware">Hardware</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="hardware-cost">Cost per unit ($)</label>
+                                <input type="number" id="hardware-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="hardware-quantity">Quantity</label>
+                                <input type="number" id="hardware-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="hardware-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="tools">Tools</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="tools-cost">Cost per unit ($)</label>
+                                <input type="number" id="tools-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="tools-quantity">Quantity</label>
+                                <input type="number" id="tools-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="tools-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="concrete">Concrete Work</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="concrete-cost">Cost per unit ($)</label>
+                                <input type="number" id="concrete-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="concrete-quantity">Quantity</label>
+                                <input type="number" id="concrete-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="concrete-subtotal">Subtotal: $0.00</div>
+                    </div>
+                </div>
+                <button type="button" id="add-misc" class="add-button">+ Add Miscellaneous Item</button>
+                <div class="total" id="misc-total">Total Miscellaneous Cost: $0.00</div>
+                <div class="input-group">
+                    <label for="notes_misc">Notes Misc (optional)</label>
+                    <textarea id="notes_misc" placeholder="Enter additional notes (300 Character limit)" maxlength="300"
+                        rows="10" cols="50"></textarea>
+                </div>
+            </div>
+
+            <!-- Column 2: Main Equipment -->
+            <div class="column">
+                <h2>Main Equipment</h2>
+                <div id="equipment-fields">
+                    <!-- Default Equipment Fields -->
+                    <div class="input-group">
+                        <label for="switch-board">Switch Board</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="switch-board-cost">Cost per unit ($)</label>
+                                <input type="number" id="switch-board-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="switch-board-quantity">Quantity</label>
+                                <input type="number" id="switch-board-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="switch-board-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <!-- Repeat for Panel 1, Panel 2, Panel 3, Panel 4, XFMR 1, XFMR 2, XFMR 3, XFMR 4 -->
+                    <!-- Panel 1 -->
+                    <div class="input-group">
+                        <label for="panel-1">Panel 1</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="panel-1-cost">Cost per unit ($)</label>
+                                <input type="number" id="panel-1-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="panel-1-quantity">Quantity</label>
+                                <input type="number" id="panel-1-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="panel-1-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <!-- Add more equipment as needed -->
+                    <div class="input-group">
+                        <label for="panel-2">Panel 2</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="panel-2-cost">Cost per unit ($)</label>
+                                <input type="number" id="panel-2-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="panel-2-quantity">Quantity</label>
+                                <input type="number" id="panel-2-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="panel-2-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="panel-3">Panel 3</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="panel-3-cost">Cost per unit ($)</label>
+                                <input type="number" id="panel-3-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="panel-3-quantity">Quantity</label>
+                                <input type="number" id="panel-3-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="panel-3-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="panel-4">Panel 4</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="panel-4-cost">Cost per unit ($)</label>
+                                <input type="number" id="panel-4-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="panel-4-quantity">Quantity</label>
+                                <input type="number" id="panel-4-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="panel-4-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="xfmr-1">XFMR 1</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="xfmr-1-cost">Cost per unit ($)</label>
+                                <input type="number" id="xfmr-1-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="xfmr-1-quantity">Quantity</label>
+                                <input type="number" id="xfmr-1-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="xfmr-1-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="xfmr-2">XFMR 2</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="xfmr-2-cost">Cost per unit ($)</label>
+                                <input type="number" id="xfmr-2-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="xfmr-2-quantity">Quantity</label>
+                                <input type="number" id="xfmr-2-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="xfmr-2-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="xfmr-3">XFMR 3</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="xfmr-3-cost">Cost per unit ($)</label>
+                                <input type="number" id="xfmr-3-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="xfmr-3-quantity">Quantity</label>
+                                <input type="number" id="xfmr-3-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="xfmr-3-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="xfmr-4">XFMR 4</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="xfmr-4-cost">Cost per unit ($)</label>
+                                <input type="number" id="xfmr-4-cost" placeholder="Cost per unit ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="xfmr-4-quantity">Quantity</label>
+                                <input type="number" id="xfmr-4-quantity" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="xfmr-4-subtotal">Subtotal: $0.00</div>
+                    </div>
+                </div>
+                <button type="button" id="add-equipment" class="add-button">+ Add Main Equipment</button>
+                <div class="total" id="equipment-total">Total Main Equipment Cost: $0.00</div>
+                <div class="input-group">
+                    <label for="notes_equip">Notes Equip (optional)</label>
+                    <textarea id="notes_equip" placeholder="Enter additional notes (300 Character limit)"
+                        maxlength="300" rows="10" cols="50"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAX and Grand Total Section -->
+        <div class="tax-grand-total">
+            <div class="input-group">
+                <label for="tax">TAX (%)</label>
+                <input type="number" id="tax" placeholder="Enter TAX percentage" value="9.5" step="0.1" required>
+            </div>
+            <div class="result">
+                <h2>TAX Amount: <span id="tax-amount">$0.00</span></h2>
+                <h2>Grand Total (including TAX): <span id="grand-total">$0.00</span></h2>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate Totals</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/script3.js') }}"></script>
+
+{% endblock %}

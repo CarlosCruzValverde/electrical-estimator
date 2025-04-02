@@ -1,0 +1,208 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container">
+    <header>
+        <h1>Wire & Conduit</h1>
+    </header>
+    <form id="awgConduitForm" action="{{ url_for('portfolio.estimate_awg_cond') }}" method="POST">
+
+        <!-- Hidden field for project_id -->
+        <input type="hidden" id="projectId" name="project_id">
+
+        <!-- Columns for AWG and Conduit -->
+        <div class="columns">
+            <!-- Column 1: AWG Gauges -->
+            <div class="column">
+                <h2>AWG Gauges</h2>
+                <div id="awg-fields">
+                    <!-- Default AWG fields -->
+                    <div class="input-group">
+                        <label for="awg10">AWG 10</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="awg10-cost">Cost per foot ($)</label>
+                                <input type="number" id="awg10-cost" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="awg10-length">Length (feet)</label>
+                                <input type="number" id="awg10-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="awg10-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <!-- Repeat for AWG 8, 6, 3/0, 350 mcm -->
+                    <div class="input-group">
+                        <label for="awg8">AWG 8</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="awg8-cost">Cost per foot ($)</label>
+                                <input type="number" id="awg8-cost" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="awg8-length">Length (feet)</label>
+                                <input type="number" id="awg8-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="awg8-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="awg6">AWG 6</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="awg6-cost">Cost per foot ($)</label>
+                                <input type="number" id="awg6-cost" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="awg6-length">Length (feet)</label>
+                                <input type="number" id="awg6-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="awg6-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="awg3/0">3/0</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="awg3/0-cost">Cost per foot ($)</label>
+                                <input type="number" id="awg3/0-cost" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="awg3/0-length">Length (feet)</label>
+                                <input type="number" id="awg3/0-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="awg3/0-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="awg350">350 mcm</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="awg350-cost">Cost per foot ($)</label>
+                                <input type="number" id="awg350-cost" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="awg350-length">Length (feet)</label>
+                                <input type="number" id="awg350-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="awg350-subtotal">Subtotal: $0.00</div>
+                    </div>
+                </div>
+                <button type="button" id="add-awg" class="add-button">+ Add AWG</button>
+                <div class="total" id="awg-total">Total AWG Cost: $0.00</div>
+                <div class="input-group">
+                    <label for="notes_awg">Notes Wire (optional)</label>
+                    <textarea id="notes_awg" placeholder="Enter additional notes (300 Character limit)" maxlength="300"
+                        rows="10" cols="50"></textarea>
+                </div>
+            </div>
+
+            <!-- Column 2: Conduit Sizes -->
+            <div class="column">
+                <h2>Conduit Sizes</h2>
+                <div id="conduit-fields">
+                    <!-- Default Conduit fields -->
+                    <!-- Repeat for 3/4, 1, 1 1/4, 1 1/2 -->
+                    <div class="input-group">
+                        <label for="conduit-three-fourth">3/4"</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="conduit-three-fourth-cost">Cost per foot ($)</label>
+                                <input type="number" id="conduit-three-fourth-cost" placeholder="Cost per foot ($)"
+                                    step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="conduit-three-fourth-length">Length (feet)</label>
+                                <input type="number" id="conduit-three-fourth-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="conduit-three-fourth-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="conduit-one">1"</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="conduit-one-cost">Cost per foot ($)</label>
+                                <input type="number" id="conduit-one-cost" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="conduit-one-length">Length (feet)</label>
+                                <input type="number" id="conduit-one-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="conduit-one-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="conduit-one-quarter">1 1/4"</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="conduit-one-quarter-cost">Cost per foot ($)</label>
+                                <input type="number" id="conduit-one-quarter-cost" placeholder="Cost per foot ($)"
+                                    step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="conduit-one-quarter-length">Length (feet)</label>
+                                <input type="number" id="conduit-one-quarter-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="conduit-one-quarter-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="conduit-one-half">1 1/2"</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="conduit-one-half-cost">Cost per foot ($)</label>
+                                <input type="number" id="conduit-one-half-cost" placeholder="Cost per foot ($)"
+                                    step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="conduit-one-half-length">Length (feet)</label>
+                                <input type="number" id="conduit-one-half-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="conduit-one-half-subtotal">Subtotal: $0.00</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="conduit-two">2"</label>
+                        <div class="input-row">
+                            <div class="input-with-label">
+                                <label for="conduit-two">Cost per foot ($)</label>
+                                <input type="number" id="conduit-two" placeholder="Cost per foot ($)" step="0.01">
+                            </div>
+                            <div class="input-with-label">
+                                <label for="conduit-two-length">Length (feet)</label>
+                                <input type="number" id="conduit-two-length" placeholder="Length (feet)">
+                            </div>
+                        </div>
+                        <div class="subtotal" id="conduit-two-subtotal">Subtotal: $0.00</div>
+                    </div>
+                </div>
+                <button type="button" id="add-conduit" class="add-button">+ Add Conduit</button>
+                <div class="total" id="conduit-total">Total Conduit Cost: $0.00</div>
+                <div class="input-group">
+                    <label for="notes_conduit">Notes Conduit (optional)</label>
+                    <textarea id="notes_conduit" placeholder="Enter additional notes (300 Character limit)"
+                        maxlength="300" rows="10" cols="50"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAX and Grand Total Section -->
+        <div class="tax-grand-total">
+            <div class="input-group">
+                <label for="tax">TAX (%)</label>
+                <input type="number" id="tax" placeholder="Enter TAX percentage" value="9.5" step="0.1" required>
+            </div>
+            <div class="result">
+                <h2>TAX Amount: <span id="tax-amount">$0.00</span></h2>
+                <h2>Grand Total (including TAX): <span id="grand-total">$0.00</span></h2>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate Totals</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/script2.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+
+<div class="center-container">
+    <img src="/static/cyber.jpg" alt="" class="resized-image">
+    <input class="search-box" autocomplete="off" autofocus type="search" id="search" placeholder="Search for address"
+        role="combobox" maxlength="2048">
+</div>
+
+<ul id="results"></ul>
+
+<script>
+    let input = document.querySelector('#search');
+    input.addEventListener('input', async function () {
+        let response = await fetch('/portfolio/search?q=' + input.value);
+        let projects = await response.json();
+
+        let html = '';
+        for (let id in projects) {
+            let actual_id = projects[id].id;
+            let pType = projects[id].p_type.replace('<', '&lt;').replace('&', '&amp;');
+            let poNum = projects[id].po_number.replace('<', '&lt;').replace('&', '&amp;');
+            let address = projects[id].address.replace('<', '&lt;').replace('&', '&amp;');
+            let numChargers = projects[id].num_chargers; // This is a number
+            let currStat = projects[id].project_status.replace('<', '&lt;').replace('&', '&amp;');
+            let invoice = projects[id].invoice.replace('<', '&lt;').replace('&', '&amp;');
+            let datto = projects[id].datto.replace('<', '&lt;').replace('&', '&amp;');
+            html += `<li><a class="text-decoration-none" href="/portfolio/project/${actual_id}">${pType} | ${poNum} | ${address} | ${numChargers} | ${currStat} | ${invoice} | ${datto}</a></li>`;
+        }
+        document.querySelector('#results').innerHTML = html;
+    });
+</script>
+
+{% endblock %}

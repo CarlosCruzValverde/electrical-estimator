@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container">
+    <header>
+        <h1>New Estimation</h1>
+    </header>
+    <form id="newProjectForm" action="{{ url_for('portfolio.new_project') }}" method="POST">
+
+        <!-- Project Address and Company -->
+        <div class="address-project">
+            <div class="input-group">
+                <label for="address">Project Address</label>
+                <input type="text" id="address" placeholder="Enter project address" required>
+            </div>
+        </div>
+        <div class="address-project">
+            <div class="input-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" placeholder="Enter company name" value="Chargie">
+            </div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="input-group">
+            <div class="input-row">
+                <label for="start_date">Date</label>
+                <input type="date" id="start_date" required>
+            </div>
+        </div>
+
+        <!-- Project Type -->
+        <div class="p_type-selection">
+            <label for="p_type">Project Type</label>
+            <select id="p_type" name="p_type" onchange="handleChange()" required>
+                <option value="">Select an option</option>
+                <option value="sce">SCE</option>
+                <option value="dwp">DWP</option>
+                <option value="custom">Custom</option> <!-- Allows custom entry -->
+            </select>
+            <input type="text" id="customOption" name="customOption" style="display:none;"
+                placeholder="Type your custom project classification" />
+        </div>
+
+        <!-- Hidden User ID Field -->
+        <input type="hidden" id="userId" name="user_id" value="{{ user_id }}">
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Start Estimation</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/script1.js') }}"></script>
+
+{% endblock %}

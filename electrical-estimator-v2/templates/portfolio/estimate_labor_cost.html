@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container">
+    <header>
+        <h1>Labor Cost Estimation</h1>
+    </header>
+    <form id="laborCostForm" action="{{ url_for('portfolio.estimate_labor_cost') }}" method="POST">
+        <div class="labor-cost-fields">
+            <!-- Position 1: Project Manager -->
+            <div class="input-group">
+                <label for="position-1">Project Manager</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-1-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-1-rate" placeholder="Rate" value="75" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-1-workers">Workers</label>
+                        <input type="number" id="position-1-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-1-hours">Hours/Day</label>
+                        <input type="number" id="position-1-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-1-days">Days</label>
+                        <input type="number" id="position-1-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-1-subtotal">Subtotal: $0.00</div>
+            </div>
+
+            <!-- Position 2: Foreman -->
+            <div class="input-group">
+                <label for="position-2">Foreman</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-2-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-2-rate" placeholder="Rate" value="100" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-2-workers">Workers</label>
+                        <input type="number" id="position-2-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-2-hours">Hours/Day</label>
+                        <input type="number" id="position-2-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-2-days">Days</label>
+                        <input type="number" id="position-2-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-2-subtotal">Subtotal: $0.00</div>
+            </div>
+
+            <!-- Position 3: Journeyman Wireman -->
+            <div class="input-group">
+                <label for="position-3">Journeyman Wireman</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-3-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-3-rate" placeholder="Rate" value="92" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-3-workers">Workers</label>
+                        <input type="number" id="position-3-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-3-hours">Hours/Day</label>
+                        <input type="number" id="position-3-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-3-days">Days</label>
+                        <input type="number" id="position-3-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-3-subtotal">Subtotal: $0.00</div>
+            </div>
+
+            <!-- Position 4: Apprentice 2nd Year -->
+            <div class="input-group">
+                <label for="position-4">Apprentice 2nd Year</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-4-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-4-rate" placeholder="Rate" value="58" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-4-workers">Workers</label>
+                        <input type="number" id="position-4-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-4-hours">Hours/Day</label>
+                        <input type="number" id="position-4-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-4-days">Days</label>
+                        <input type="number" id="position-4-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-4-subtotal">Subtotal: $0.00</div>
+            </div>
+
+            <!-- Position 5: Apprentice 3rd Year -->
+            <div class="input-group">
+                <label for="position-5">Apprentice 3rd Year</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-5-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-5-rate" placeholder="Rate" value="65" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-5-workers">Workers</label>
+                        <input type="number" id="position-5-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-5-hours">Hours/Day</label>
+                        <input type="number" id="position-5-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-5-days">Days</label>
+                        <input type="number" id="position-5-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-5-subtotal">Subtotal: $0.00</div>
+            </div>
+
+            <!-- Position 6: Apprentice 4th Year -->
+            <div class="input-group">
+                <label for="position-6">Apprentice 4th Year</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-6-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-6-rate" placeholder="Rate" value="72" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-6-workers">Workers</label>
+                        <input type="number" id="position-6-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-6-hours">Hours/Day</label>
+                        <input type="number" id="position-6-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-6-days">Days</label>
+                        <input type="number" id="position-6-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-6-subtotal">Subtotal: $0.00</div>
+            </div>
+
+            <!-- Position 7: Apprentice 5th Year -->
+            <div class="input-group">
+                <label for="position-7">Apprentice 5th Year</label>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-7-rate">Rate ($/hr)</label>
+                        <input type="number" id="position-7-rate" placeholder="Rate" value="80" step="0.01">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-7-workers">Workers</label>
+                        <input type="number" id="position-7-workers" placeholder="Workers">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-with-label">
+                        <label for="position-7-hours">Hours/Day</label>
+                        <input type="number" id="position-7-hours" placeholder="Hours" value="8" step="0.1">
+                    </div>
+                    <div class="input-with-label">
+                        <label for="position-7-days">Days</label>
+                        <input type="number" id="position-7-days" placeholder="Days">
+                    </div>
+                </div>
+                <div class="subtotal" id="position-7-subtotal">Subtotal: $0.00</div>
+            </div>
+        </div>
+
+        <!-- Total Section -->
+        <div class="grand-total">
+            <div class="result">
+                <h2>Labor Total: <span id="labor-total">$0.00</span></h2>
+            </div>
+        </div>
+
+        <!-- Column 2: Low Voltage -->
+        <div class="column">
+            <h1 class="low-voltage">Low Voltage</h1>
+            <div class="low-voltage-fields">
+                <div class="input-group">
+                    <label for="chargers-count">Number of Chargers</label>
+                    <input type="number" id="chargers-count" placeholder="Enter number of chargers">
+                </div>
+                <div class="input-group">
+                    <label for="charger-price">Price per Charger ($)</label>
+                    <input type="number" id="charger-price" placeholder="Enter price" value="250" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="low-voltage-subtotal">Low Voltage</label>
+                    <div class="subtotal" id="low-voltage-subtotal">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Low Voltage Total Section -->
+        <div class="grand-total">
+            <div class="result">
+                <h2>Low Voltage Total: <span id="low-voltage-total-display">$0.00</span></h2>
+            </div>
+        </div>
+
+        <!-- Grand Total Section -->
+        <div class="grand-total">
+            <div class="result">
+                <h1>Grand Total (Labor & Low Voltage): <span id="labor-grand-total">$0.00</span></h1>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate Labor Costs</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/script4.js') }}"></script>
+{% endblock %}

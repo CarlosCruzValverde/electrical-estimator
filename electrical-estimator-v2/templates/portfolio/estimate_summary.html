@@ -1,0 +1,183 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container">
+    <header>
+        <h1>Estimation Summary</h1>
+    </header>
+    <form id="summaryForm" action="{{ url_for('portfolio.save_summary') }}" method="POST">
+        <input type="hidden" id="projectId" name="project_id" value="{{ project_id }}">
+
+        <div class="summary-grid" style="margin-bottom: 40px;">
+            <!-- Row Headers -->
+            <div class="grid-header">Category</div>
+            <div class="grid-header">Base Cost</div>
+            <div class="grid-header">Mark Up</div>
+            <div class="grid-header">Subtotal</div>
+            <div class="grid-header">Profit</div>
+
+            <!-- AWG Row -->
+            <div class="highlight">AWG</div>
+            <div id="awg-base-cost" class="base-cost">$0.00</div>
+            <div><input type="number" id="awg-markup" value="1.25" step="0.01" min="1.0" class="markup-input"></div>
+            <div id="awg-subtotal" class="sub">$0.00</div>
+            <div id="awg-profit">$0.00</div>
+
+            <!-- Conduit Row -->
+            <div class="highlight">Conduit</div>
+            <div id="conduit-base-cost" class="base-cost">$0.00</div>
+            <div><input type="number" id="conduit-markup" value="1.25" step="0.01" min="1.0" class="markup-input"></div>
+            <div id="conduit-subtotal" class="sub">$0.00</div>
+            <div id="conduit-profit">$0.00</div>
+
+            <!-- Miscellaneous Row -->
+            <div class="highlight">Miscellaneous</div>
+            <div id="misc-base-cost" class="base-cost">$0.00</div>
+            <div><input type="number" id="misc-markup" value="1.25" step="0.01" min="1.0" class="markup-input"></div>
+            <div id="misc-subtotal" class="sub">$0.00</div>
+            <div id="misc-profit">$0.00</div>
+
+            <!-- Equipment Row -->
+            <div class="highlight">Equipment</div>
+            <div id="equipment-base-cost" class="base-cost">$0.00</div>
+            <div><input type="number" id="equipment-markup" value="1.25" step="0.01" min="1.0" class="markup-input">
+            </div>
+            <div id="equipment-subtotal" class="sub">$0.00</div>
+            <div id="equipment-profit">$0.00</div>
+
+            <!-- Labor Row -->
+            <div class="highlight">Labor</div>
+            <div id="labor-base-cost" class="base-cost">$0.00</div>
+            <div><input type="number" id="labor-markup" value="1.25" step="0.01" min="1.0" class="markup-input"></div>
+            <div id="labor-subtotal" class="sub">$0.00</div>
+            <div id="labor-profit">$0.00</div>
+
+            <!-- Low Voltage Row -->
+            <div class="highlight">Low Voltage</div>
+            <div id="low-voltage-base-cost" class="base-cost">$0.00</div>
+            <div><input type="number" id="low-voltage-markup" value="1.0" step="0.01" min="1.0" class="markup-input">
+            </div>
+            <div id="low-voltage-subtotal" class="sub">$0.00</div>
+            <div id="low-voltage-profit">$0.00</div>
+
+            <!-- Permits & Fees Row -->
+            <div class="highlight">Permits & Fees</div>
+            <div><input type="number" id="permits-base-cost" value="0.00" step="1" min="0" class="base-input"></div>
+            <div><input type="number" id="permits-markup" value="1.25" step="0.01" min="1.0" class="markup-input"></div>
+            <div id="permits-subtotal" class="sub">$0.00</div>
+            <div id="permits-profit">$0.00</div>
+        </div>
+
+        <!-- Summary Profit -->
+        <div class="summary-breakdown1">
+            <div class="breakdown-row">
+                <span class="breakdown-label">Total Profit:</span>
+                <span id="tax-base-cost1">$0.00</span>
+            </div>
+        </div>
+
+        <div class="summary-grid">
+            <!-- Income Tax Row -->
+            <div class="highlight">Income Tax</div>
+            <div id="tax-base-cost" class="base-cost2">$0.00</div>
+            <div>
+                <input type="number" id="tax-percentage" value="30" step="1" min="0" class="percentage-input">
+                <span>%</span>
+            </div>
+            <div id="tax-subtotal" class="sub">$0.00</div>
+            <div id="tax-profit"></div>
+
+            <!-- Overhead Margin Row -->
+            <div class="highlight">Overhead Margin</div>
+            <div id="overhead-base-cost" class="base-cost3">$0.00</div>
+            <div>
+                <input type="number" id="overhead-percentage" value="8.5" step="0.1" min="0" class="percentage-input">
+                <span>%</span>
+            </div>
+            <div id="overhead-subtotal" class="sub">$0.00</div>
+            <div id="overhead-profit"></div>
+        </div>
+
+        <!-- Summary Breakdown -->
+        <div class="summary-breakdown">
+            <div class="breakdown-row">
+                <span class="breakdown-label">Grand Subtotal:</span>
+                <span id="grand-subtotal">$0.00</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="breakdown-label">Income Tax (<span id="tax-percentage-display">30</span>% of
+                    profit):</span>
+                <span id="tax-summary">$0.00</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="breakdown-label">Overhead Margin (<span
+                        id="overhead-percentage-display">8.5</span>%):</span>
+                <span id="overhead-summary">$0.00</span>
+            </div>
+        </div>
+
+        <!-- Grand Total -->
+        <div class="grand-total-section">
+            <h2>Grand Total: <span id="grand-total">$0.00</span></h2>
+        </div>
+
+        <!-- Charger Information -->
+        <div class="charger-info">
+            <div class="charger-row">
+                <span class="charger-label">Number of Chargers:</span>
+                <span id="chargers-count">0</span>
+            </div>
+            <div class="charger-row">
+                <span class="charger-label">Price Per Charger:</span>
+                <span id="price-per-charger">$0.00</span>
+            </div>
+        </div>
+
+        <!-- Approval Status -->
+        <div class="approval-section">
+            <span class="approval-label">Approved:</span>
+            <div class="approval-options">
+                <label class="radio-option">
+                    <input type="radio" name="approved" value="true" id="approved-yes">
+                    <span class="radio-checkmark"></span>
+                    <span class="radio-text">Yes</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="approved" value="false" id="approved-no">
+                    <span class="radio-checkmark"></span>
+                    <span class="radio-text">No</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Total Submitted and Approved Amount -->
+        <div class="amount-section">
+            <div class="amount-row">
+                <label for="total-submitted" class="fw-bold">Total Submitted:</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" id="total-submitted" name="total_submitted" class="form-control" step="0.1"
+                        min="0" value="0.00">
+                </div>
+            </div>
+            <div class="amount-row">
+                <label for="approved-amount" class="fw-bold">Approved Amount:</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" id="approved-amount" name="approved_amount" class="form-control" step="0.1"
+                        min="0" value="0.00">
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="notes-section">
+            <label for="summary-notes">Additional Notes:</label>
+            <textarea id="summary-notes" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Summary</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/summary.js') }}"></script>
+{% endblock %}
